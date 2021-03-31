@@ -1,0 +1,11 @@
+package avlTree;
+
+class Node {
+  int data, height;
+  Node left, right;
+
+  Node(int d) {
+    data = d;
+    height = 1;
+  }
+}
