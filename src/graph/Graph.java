@@ -147,6 +147,7 @@ public class Graph {
         return true;
       }
     }
+    // this keeps track of the elements which are removed from the call stack
     isRecur[s] = false;
     return false;
   }
