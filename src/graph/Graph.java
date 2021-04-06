@@ -84,20 +84,20 @@ public class Graph {
       visited[i] = false;
     }
     for (int i = 0; i < this.v; i++) {
-      if(visited[i] == false) {
+      if (visited[i] == false) {
         topologicalSortUtil(i, visited, stack);
       }
     }
-    while(!stack.isEmpty()) {
+    while (!stack.isEmpty()) {
       System.out.print(stack.pop() + " ");
     }
   }
 
   public boolean isCycleUndirected() {
     boolean visited[] = new boolean[this.v];
-    for(int i = 0; i < this.v; i++) {
-      if(visited[i] == false) {
-        if(checkCycleDFSUndirected(i, -1, visited)) {
+    for (int i = 0; i < this.v; i++) {
+      if (visited[i] == false) {
+        if (checkCycleDFSUndirected(i, -1, visited)) {
           return true;
         }
       }
@@ -108,13 +108,13 @@ public class Graph {
   private boolean checkCycleDFSUndirected(int s, int p, boolean[] visited) {
     visited[s] = true;
     Iterator<Integer> it = adj[s].iterator();
-    while(it.hasNext()) {
+    while (it.hasNext()) {
       int i = it.next();
-      if(visited[i] == false) {
-        if(checkCycleDFSUndirected(i, s, visited) == true) {
+      if (visited[i] == false) {
+        if (checkCycleDFSUndirected(i, s, visited) == true) {
           return true;
         }
-      } else if(i != p || i == s) {
+      } else if (i != p || i == s) {
         return true;
       }
     }
@@ -123,11 +123,12 @@ public class Graph {
 
   public boolean isCycleDirected() {
     boolean visited[] = new boolean[this.v];
-    // this keeps a track of if the vertice is already in the recursive call stack or not
-    boolean isRecur[] = new boolean[this.v]; 
-    for(int i = 0; i < this.v; i++) {
-      if(visited[i] == false) {
-        if(checkCycleDFSDirected(i, visited, isRecur)) {
+    // this keeps a track of if the vertice is already in the recursive call stack
+    // or not
+    boolean isRecur[] = new boolean[this.v];
+    for (int i = 0; i < this.v; i++) {
+      if (visited[i] == false) {
+        if (checkCycleDFSDirected(i, visited, isRecur)) {
           return true;
         }
       }
@@ -139,17 +140,60 @@ public class Graph {
     visited[s] = true;
     isRecur[s] = true;
     Iterator<Integer> it = adj[s].iterator();
-    while(it.hasNext()) {
+    while (it.hasNext()) {
       int i = it.next();
-      if(visited[i] == false && checkCycleDFSDirected(i, visited, isRecur)) {
+      if (visited[i] == false && checkCycleDFSDirected(i, visited, isRecur)) {
         return true;
-      } else if(isRecur[i] == true && i == s) {
+      } else if (isRecur[i] == true && i == s) {
         return true;
       }
     }
     // this keeps track of the elements which are removed from the call stack
     isRecur[s] = false;
     return false;
+  }
+
+  public void topoLogicalSortKahnAlgo() {
+    int indegree[] = new int[this.v];
+    for (int i = 0; i < this.v; i++) {
+      Iterator<Integer> it = adj[i].iterator();
+      while (it.hasNext()) {
+        int u = it.next();
+        indegree[u]++;
+      }
+    }
+
+    Queue<Integer> q = new LinkedList<>();
+    for (int i = 0; i < this.v; i++) {
+      if (indegree[i] == 0) {
+        q.add(i);
+      }
+    }
+
+    int count = 0;
+
+    ArrayList<Integer> topOrder = new ArrayList<>();
+    while (!q.isEmpty()) {
+      int u = q.poll();
+      topOrder.add(u);
+      Iterator<Integer> it = adj[u].iterator();
+      while (it.hasNext()) {
+        int i = it.next();
+        if (--indegree[i] == 0) {
+          q.add(i);
+        }
+      }
+      count++;
+    }
+
+    if (count != this.v) {
+      System.out.println("Their exists a cycle in the graph");
+      return;
+    }
+    for (int e : topOrder) {
+      System.out.print(e + " ");
+    }
+    System.out.println();
   }
 
   public static void main(String[] args) {
@@ -171,7 +215,7 @@ public class Graph {
     // g.DFS(3);
     // System.out.println();
     // g.BFS(2);
-    //Dank Mono, Fira Code, Inconsolata
-    g.topologicalSort();
+    // Dank Mono, Fira Code, Inconsolata
+    g.topoLogicalSortKahnAlgo();
   }
 }
