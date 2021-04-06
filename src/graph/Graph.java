@@ -66,10 +66,9 @@ public class Graph {
 
   public void topologicalSortUtil(int v, boolean visited[], Stack<Integer> stack) {
     visited[v] = true;
-    Integer i;
     Iterator<Integer> it = adj[v].iterator();
     while (it.hasNext()) {
-      i = it.next();
+      int i = it.next();
       if (!visited[i]) {
         topologicalSortUtil(i, visited, stack);
       }
@@ -80,9 +79,6 @@ public class Graph {
   public void topologicalSort() {
     Stack<Integer> stack = new Stack<>();
     boolean visited[] = new boolean[this.v];
-    for (int i = 0; i < this.v; i++) {
-      visited[i] = false;
-    }
     for (int i = 0; i < this.v; i++) {
       if (visited[i] == false) {
         topologicalSortUtil(i, visited, stack);
