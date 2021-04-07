@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Graph {
 
@@ -192,26 +193,65 @@ public class Graph {
     System.out.println();
   }
 
+  public void shortestPathBFS(int s) {
+    Queue<Integer> q = new LinkedList<>();
+    boolean visited[] = new boolean[this.v];
+    int distance[] = new int[this.v];
+    distance[s] = 0;
+    visited[s] = true;
+    q.add(s);
+    while (!q.isEmpty()) {
+      int v = q.poll();
+      Iterator<Integer> it = adj[v].iterator();
+      while (it.hasNext()) {
+        int i = it.next();
+        if (!visited[i]) {
+          q.add(i);
+          visited[i] = true;
+          distance[i] = distance[v] + 1;
+        }
+      }
+    }
+    System.out.println();
+    for (int e : distance) {
+      System.out.print(e + " ");
+    }
+    System.out.println();
+  }
+
   public static void main(String[] args) {
-    Graph g = new Graph(6);
+    Graph g = new Graph(7);
     // g.addEdge(0, 1);
     // g.addEdge(0, 2);
     // g.addEdge(1, 2);
     // g.addEdge(2, 0);
     // g.addEdge(2, 3);
     // g.addEdge(3, 3);
-    g.addEdge(5, 2);
-    g.addEdge(5, 0);
-    g.addEdge(4, 0);
-    g.addEdge(4, 1);
-    g.addEdge(2, 3);
-    g.addEdge(3, 1);
+
+    // g.addEdge(5, 2);
+    // g.addEdge(5, 0);
+    // g.addEdge(4, 0);
+    // g.addEdge(4, 1);
+    // g.addEdge(2, 3);
+    // g.addEdge(3, 1);
+
+    g.addEdge(0, 1);
+    g.addEdge(0, 3);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(2, 0);
+    g.addEdge(2, 5);
+    g.addEdge(3, 5);
+    g.addEdge(3, 6);
+    g.addEdge(4, 6);
+    g.addEdge(6, 5);
 
     // System.out.println("DFS of this graph is");
     // g.DFS(3);
     // System.out.println();
     // g.BFS(2);
     // Dank Mono, Fira Code, Inconsolata
-    g.topoLogicalSortKahnAlgo();
+    // g.topoLogicalSortKahnAlgo();
+    g.shortestPathBFS(2);
   }
 }
