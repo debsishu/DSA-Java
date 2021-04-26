@@ -1,6 +1,17 @@
 package gfgPractice;
 import java.util.*;
 public class verticalSum {
+
+  static class ListNode {
+    int data;
+    ListNode prev;
+    ListNode next;
+    ListNode(int data, ListNode prev, ListNode next) {
+      this.data = data;
+      this.prev = prev;
+      this.next = next;
+    }
+  
   
   public static void main(String[] args) {
     Node<Integer> root = new Node<Integer>(1);
@@ -54,13 +65,4 @@ public class verticalSum {
   
 }
 
-class ListNode {
-  int data;
-  ListNode prev;
-  ListNode next;
-  ListNode(int data, ListNode prev, ListNode next) {
-    this.data = data;
-    this.prev = prev;
-    this.next = next;
-  }
 }

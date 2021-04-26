@@ -6,7 +6,7 @@ public class AddOne {
     head.next = new Node(4);
     head.next.next = new Node(3);
     Node newHead = addOne(head);
-    while(newHead != null) {
+    while (newHead != null) {
       System.out.print(newHead.data);
     }
     System.out.println();
@@ -19,11 +19,11 @@ public class AddOne {
     int sum = 0;
     Node prev = null;
     boolean first = true;
-    while(curr != null) {
+    while (curr != null) {
       prev = curr;
       sum = carry;
       sum += curr.data;
-      if(first) {
+      if (first) {
         sum++;
         first = false;
       }
@@ -31,7 +31,7 @@ public class AddOne {
       carry = sum / 10;
       curr = curr.next;
     }
-    if(carry != 0) {
+    if (carry != 0) {
       Node newNode = new Node(carry);
       prev.next = newNode;
     }
@@ -41,7 +41,7 @@ public class AddOne {
   public static Node reverseList(Node head) {
     Node curr = head;
     Node prev = null;
-    while(curr != null) {
+    while (curr != null) {
       Node next = curr.next;
       curr.next = prev;
       prev = curr;
@@ -54,6 +54,7 @@ public class AddOne {
 class Node {
   int data;
   Node next;
+
   Node(int data) {
     this.data = data;
     next = null;

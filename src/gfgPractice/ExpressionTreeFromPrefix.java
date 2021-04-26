@@ -3,6 +3,18 @@ package gfgPractice;
 import java.util.*;
 
 public class ExpressionTreeFromPrefix {
+
+    static class ENode {
+        char data;
+        ENode left;
+        ENode right;
+
+        ENode(char data) {
+            this.data = data;
+            left = right = null;
+        }
+    }
+
     public static void main(String[] args) {
         // *+AB-CD
         char prefix[] = { '*', '+', 'A', 'B', '-', 'C', 'D' };
@@ -11,9 +23,9 @@ public class ExpressionTreeFromPrefix {
     }
 
     public static ENode buildTree(char prefix[]) {
-        Stack<ENode> s = new Stack<>(); //created a stack
-        for (int i = prefix.length - 1; i >= 0; i--) { //traversing the array from right to left
-            if (!isOperator(prefix[i])) { //if the element is not an operator we push it onto the stack
+        Stack<ENode> s = new Stack<>(); // created a stack
+        for (int i = prefix.length - 1; i >= 0; i--) { // traversing the array from right to left
+            if (!isOperator(prefix[i])) { // if the element is not an operator we push it onto the stack
                 ENode temp = new ENode(prefix[i]);
                 s.push(temp);
             } else {
@@ -44,15 +56,4 @@ public class ExpressionTreeFromPrefix {
         return false;
     }
 
-}
-
-class ENode {
-    char data;
-    ENode left;
-    ENode right;
-
-    ENode(char data) {
-        this.data = data;
-        left = right = null;
-    }
 }

@@ -1,6 +1,16 @@
 package gfgPractice;
 import java.util.*;
 public class expressionTree {
+
+  static class nodeTree {
+    char data;
+    nodeTree left;
+    nodeTree right;
+    nodeTree(char data) {
+      this.data = data;
+      left = right = null;
+    }
+  }
   public static void main(String[] args) {
     char postFix[] = {'A', 'B', '+', 'C', 'D', '+', '*'};
     nodeTree root = buildExpressionTree(postFix);
@@ -45,12 +55,4 @@ public class expressionTree {
   }
 }
 
-class nodeTree {
-  char data;
-  nodeTree left;
-  nodeTree right;
-  nodeTree(char data) {
-    this.data = data;
-    left = right = null;
-  }
-}
+
