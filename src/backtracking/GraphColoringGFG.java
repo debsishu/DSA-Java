@@ -2,6 +2,9 @@ package backtracking;
 
 import java.util.*;
 
+// Check the Striver(TakeUForward) video
+// Check GFG solution for an easy way
+
 public class GraphColoringGFG {
   @SuppressWarnings("unchecked")
   public static void main(String[] args) {
