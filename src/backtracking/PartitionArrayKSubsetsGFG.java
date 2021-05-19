@@ -32,8 +32,8 @@ public class PartitionArrayKSubsetsGFG {
     }
   }
 
-  static void solve(int arr[], int i, int n, int k, int subsetSum[], int sofar) {
-    if (i == n) {
+  static void solve(int arr[], int current, int n, int k, int subsetSum[], int sofar) {
+    if (current == n) {
       if (sofar == k) {
         boolean check = true;
         for (int j = 0; j < k - 1; j++) {
@@ -51,13 +51,13 @@ public class PartitionArrayKSubsetsGFG {
 
     for (int j = 0; j < k; j++) {
       if (subsetSum[j] > 0) {
-        subsetSum[j] += arr[i];
-        solve(arr, i + 1, n, k, subsetSum, sofar);
-        subsetSum[j] -= arr[i];
+        subsetSum[j] += arr[current];
+        solve(arr, current + 1, n, k, subsetSum, sofar);
+        subsetSum[j] -= arr[current];
       } else {
-        subsetSum[j] += arr[i];
-        solve(arr, i + 1, n, k, subsetSum, sofar + 1);
-        subsetSum[j] -= arr[i];
+        subsetSum[j] += arr[current];
+        solve(arr, current + 1, n, k, subsetSum, sofar + 1);
+        subsetSum[j] -= arr[current];
         break;
       }
     }
