@@ -33,15 +33,21 @@ public class PartitionArrayKSubsetsGFG {
   }
 
   static void solve(int arr[], int current, int n, int k, int subsetSum[], int sofar) {
+
+    // Base case
     if (current == n) {
+      // If we have filled up all the K subsets
       if (sofar == k) {
         boolean check = true;
+        // Checking for the values of the subsets
+        // if they are same or not
         for (int j = 0; j < k - 1; j++) {
           if (subsetSum[j] != subsetSum[j + 1]) {
             check = false;
             break;
           }
         }
+        // If yes make flag true
         if (check) {
           flag = true;
         }
@@ -50,13 +56,19 @@ public class PartitionArrayKSubsetsGFG {
     }
 
     for (int j = 0; j < k; j++) {
+      // If we are adding to an already filled subset
       if (subsetSum[j] > 0) {
         subsetSum[j] += arr[current];
+        // We only increase the current index
         solve(arr, current + 1, n, k, subsetSum, sofar);
+        // BACKTRACKING
         subsetSum[j] -= arr[current];
       } else {
+        // If we are adding it to an new empty subset
         subsetSum[j] += arr[current];
+        // We increment both the current and sofar
         solve(arr, current + 1, n, k, subsetSum, sofar + 1);
+        // BACKTRACKING
         subsetSum[j] -= arr[current];
         break;
       }
