@@ -42,40 +42,40 @@ public class BipartiteGraphBFS {
 
   }
 
-}
+  static class solutionBipartiteBFS {
+    boolean checkBipartite(int V, ArrayList<ArrayList<Integer>> adj) {
+      int color[] = new int[V];
+      Arrays.fill(color, -1);
 
-class solutionBipartiteBFS {
-  boolean checkBipartite(int V, ArrayList<ArrayList<Integer>> adj) {
-    int color[] = new int[V];
-    Arrays.fill(color, -1);
-
-    for (int i = 0; i < V; i++) {
-      if (color[i] == -1) {
-        if (!checkBipartiteUtil(adj, i, color)) {
-          return false;
+      for (int i = 0; i < V; i++) {
+        if (color[i] == -1) {
+          if (!checkBipartiteUtil(adj, i, color)) {
+            return false;
+          }
         }
       }
+      return true;
     }
-    return true;
-  }
 
-  boolean checkBipartiteUtil(ArrayList<ArrayList<Integer>> adj, int node, int color[]) {
-    Queue<Integer> q = new LinkedList<>();
-    q.add(node);
-    color[node] = 1;
+    boolean checkBipartiteUtil(ArrayList<ArrayList<Integer>> adj, int node, int color[]) {
+      Queue<Integer> q = new LinkedList<>();
+      q.add(node);
+      color[node] = 1;
 
-    while (!q.isEmpty()) {
-      int v = q.poll();
+      while (!q.isEmpty()) {
+        int v = q.poll();
 
-      for (Integer it : adj.get(v)) {
-        if (color[it] == -1) {
-          color[it] = 1 - color[v];
-          q.add(it);
-        } else if (color[it] == color[v]) {
-          return false;
+        for (Integer it : adj.get(v)) {
+          if (color[it] == -1) {
+            color[it] = 1 - color[v];
+            q.add(it);
+          } else if (color[it] == color[v]) {
+            return false;
+          }
         }
       }
+      return true;
     }
-    return true;
   }
+
 }
