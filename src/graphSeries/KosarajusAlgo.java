@@ -20,6 +20,10 @@ public class KosarajusAlgo {
 
   }
 
+  // STEP 1 : TOPOSORT THE GRAPH
+  // STEP 2 : TRANSPOSE THE GRAPH
+  // STEP 3 : DO SIMPLE DFS AND PRINT
+
   void kosaraju(ArrayList<ArrayList<Integer>> adj, int n) {
     boolean vis[] = new boolean[n];
     Stack<Integer> stack = new Stack<>();
